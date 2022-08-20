@@ -1,0 +1,11 @@
+x=00, y=x, v=0
+x=ff, y=0, v=1
+x=fe, y=1, v=1
+x=fc, y=2, v=1
+x=f8, y=3, v=1
+x=f0, y=4, v=1
+x=e0, y=5, v=1
+x=c0, y=6, v=1
+x=80, y=7, v=1
+x=00, y=0, v=0
+./tb/LDL_pri_enc_tb.sv:46: $finish called at 70 (1ns)

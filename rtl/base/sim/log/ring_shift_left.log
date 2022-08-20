@@ -1,0 +1,11 @@
+s=0, x=00, y=xxxxxxxx
+s=0, x=a5, y=10100101
+s=1, x=a5, y=01001011
+s=2, x=a5, y=10010110
+s=3, x=a5, y=00101101
+s=4, x=a5, y=01011010
+s=5, x=a5, y=10110100
+s=6, x=a5, y=01101001
+s=7, x=a5, y=11010010
+s=0, x=a5, y=10100101
+./tb/LDL_ring_shift_left_tb.sv:46: $finish called at 65 (1ns)

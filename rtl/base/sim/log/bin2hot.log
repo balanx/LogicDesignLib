@@ -1,0 +1,20 @@
+en=0, x=0, y=xxxx
+en=1, x=0, y=0001
+en=1, x=1, y=0002
+en=1, x=2, y=0004
+en=1, x=3, y=0008
+en=1, x=4, y=0010
+en=1, x=5, y=0020
+en=1, x=6, y=0040
+en=1, x=7, y=0080
+en=1, x=8, y=0100
+en=1, x=9, y=0200
+en=1, x=a, y=0400
+en=1, x=b, y=0800
+en=1, x=c, y=1000
+en=1, x=d, y=2000
+en=1, x=e, y=4000
+en=1, x=f, y=8000
+en=1, x=0, y=0001
+en=0, x=0, y=0000
+./tb/LDL_bin2hot_tb.sv:47: $finish called at 110 (1ns)
