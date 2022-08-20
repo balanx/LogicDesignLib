@@ -1,0 +1,31 @@
+VCD info: dumpfile dump.vcd opened for output.
+VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
+     time : dout empty full count
+      235 :  a0    0     1     16
+      245 :  a1    0     0     15
+      255 :  a2    0     0     14
+      265 :  a3    0     0     13
+      275 :  a4    0     0     12
+      285 :  a5    0     0     11
+      295 :  a6    0     0     10
+      305 :  a7    0     0      9
+      315 :  a8    0     0      8
+      325 :  a9    0     0      7
+      335 :  aa    0     0      6
+      345 :  ab    0     0      5
+      355 :  ac    0     0      4
+      365 :  ad    0     0      3
+      375 :  ae    0     0      2
+      385 :  af    0     0      1
+      440 :  a0    1     0      0
+      475 :  b4    0     0      2
+      485 :  b5    0     0      2
+      495 :  b6    0     0      2
+      505 :  b7    0     0      2
+      515 :  b8    0     0      2
+      525 :  b9    0     0      2
+      535 :  ba    0     0      2
+      545 :  bb    0     0      2
+      555 :  bc    0     0      2
+      565 :  bd    0     0      2
+./tb/LDL_sfifo_tb.sv:80: $finish called at 570 (1ns)
