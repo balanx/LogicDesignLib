@@ -8,4 +8,4 @@ x=e0, y=5, v=1
 x=c0, y=6, v=1
 x=80, y=7, v=1
 x=00, y=0, v=0
-./tb/LDL_pri_enc_tb.sv:46: $finish called at 70 (1ns)
+./tb/LDL_hot2bin_pri_tb.sv:46: $finish called at 70 (1ns)

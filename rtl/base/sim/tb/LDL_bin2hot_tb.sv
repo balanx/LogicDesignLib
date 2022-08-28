@@ -26,12 +26,12 @@ reg        [WIDTH -1:0] x  = 0;
 wire       [(1<<WIDTH) -1:0] y;
 
 LDL_bin2hot #(
-        .WIDTH                  ( WIDTH                  ) 
+        .BIN_WIDTH      ( WIDTH          ) 
     )
     dut (
-        .en                     ( en                     ), // input
-        .x                      ( x                      ), // input[WIDTH-1:0]
-        .y                      ( y                      )  //output[(1<<WIDTH)-1:0]
+        .en             ( en             ), // input
+        .x              ( x              ), // input[WIDTH-1:0]
+        .y              ( y              )  //output[(1<<WIDTH)-1:0]
     );
 
 

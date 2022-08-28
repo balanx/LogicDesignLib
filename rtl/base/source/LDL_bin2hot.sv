@@ -16,11 +16,11 @@
 
 module  LDL_bin2hot
 #(parameter
-    WIDTH = 8
+    BIN_WIDTH = 8
 )(
-     input                          en
-   , input       [WIDTH -1:0]       x
-   ,output reg   [(1<<WIDTH) -1:0]  y
+     input                              en
+   , input       [BIN_WIDTH -1:0]       x
+   ,output reg   [(1<<BIN_WIDTH) -1:0]  y
 );
 
 always @* begin

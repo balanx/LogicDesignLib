@@ -5,7 +5,7 @@
 // Website       : https://github.com/balanx/LogicDesignLib
 // Created On    : 2022/08/20
 //
-// Description   : Ring right shifter
+// Description   : Ring shifter
 // 
 // -----------------------------------------------------------------------------
 // Modification History:
@@ -14,19 +14,22 @@
 // 2022/08/19   热干面       1.0          Original
 // -FHDR------------------------------------------------------------------------
 
-module  LDL_ring_shift_right
+module  LDL_ring_shift
 #(parameter
     WIDTH = 8
 )(
-     input       [$clog2(WIDTH) -1:0]   sel
+     input                              dir  //0 right, 1 left
+   , input       [$clog2(WIDTH) -1:0]   step
    , input       [WIDTH -1:0]           x
    ,output reg   [WIDTH -1:0]           y
 );
 
+wire  [$clog2(WIDTH) -1:0]   s = dir ? (WIDTH - step) : step ;
+
 always @* begin 
     y = x;
     for (integer j=0; j<WIDTH; j=j+1)
-        if (j < sel)
+        if (j < s)
             y = {y[0], y[WIDTH-1:1]};
 end
 

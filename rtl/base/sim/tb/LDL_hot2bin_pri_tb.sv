@@ -15,23 +15,23 @@
 // -FHDR------------------------------------------------------------------------
 `timescale  1ns/1ns
 
-module  LDL_pri_enc_tb;
+module  LDL_hot2bin_pri_tb;
 
 
 parameter
-    WIDTH = 8;
+    WIDTH = 3;
 
-reg        [WIDTH -1:0] x = 0;
-wire       [$clog2(WIDTH) -1:0] y;
+reg        [(1<<WIDTH) -1:0] x = 0;
+wire       [WIDTH -1:0] y;
 wire                    valid;
 
-LDL_pri_enc #(
-        .WIDTH                  ( WIDTH                  ) 
+LDL_hot2bin_pri #(
+        .BIN_WIDTH      ( WIDTH          ) 
     )
     dut (
-        .x                      ( x                      ), // input[WIDTH-1:0]
-        .y                      ( y                      ), //output[$clog2(WIDTH)-1:0]
-        .valid                  ( valid                  )  //output
+        .x              ( x              ), // input[WIDTH-1:0]
+        .y              ( y              ), //output[$clog2(WIDTH)-1:0]
+        .valid          ( valid          )  //output
     );
 
 
