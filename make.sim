@@ -14,12 +14,9 @@
 # 2022/08/20   热干面    1.0          Original
 # -FHDR------------------------------------------------------------------------
 
-.PHONY: clean wave sim all help $(module)
+.PHONY: clean wave gold sim all help $(module)
 
 IVL  =  iverilog -g2012
-
-out := $(foreach i, $(module), $(i).out)
-log := $(foreach i, $(module), $(i).log)
 
 SRC = $(SRC_$(basename $1))
 
@@ -29,22 +26,26 @@ help:
 	@echo "  module-name    i.e. {$(module)}"
 	@echo "  sim            vvp running"
 	@echo "  wave           gtkwave dump.vcd"
+	@echo "  gold           compare log with gold"
 	@echo "  clean          delete working files"
 	@echo
 	@echo "Pls. visit https://github.com/balanx/LogicDesignLib"
 
 
-all : $(log)
+all : $(module)
 
 $(module) : % : %.log
 
-$(out) : clean
+%.out : clean
 	$(IVL)  -D $(shell echo $(basename $@) | tr a-z A-Z)  -o $@  $(call SRC,$@)
 
-$(log) : %.log : %.out
+%.log : %.out
 	vvp  -l $@  ./$(basename $@).out
 
-wave:
+gold :
+	@for i in `ls *.log` ; do diff -sq $$i ./log/$$i ; done
+
+wave :
 	gtkwave  *.vcd &
 
 clean:
