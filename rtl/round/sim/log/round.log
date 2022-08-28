@@ -1,14 +1,14 @@
 VCD info: dumpfile dump.vcd opened for output.
 VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
-req=00000000, ack=x, bin=x, hot=xxxxxxxx, next=x
-req=00000000, ack=0, bin=0, hot=00000000, next=0
-req=10100101, ack=1, bin=0, hot=00000001, next=0
-req=10100101, ack=1, bin=2, hot=00000100, next=1
-req=10100101, ack=1, bin=5, hot=00100000, next=3
-req=10100101, ack=1, bin=7, hot=10000000, next=6
-req=10100101, ack=1, bin=0, hot=00000001, next=0
-req=10100101, ack=1, bin=2, hot=00000100, next=1
-req=10100101, ack=1, bin=5, hot=00100000, next=3
-req=10100101, ack=1, bin=7, hot=10000000, next=6
-req=00000000, ack=0, bin=6, hot=00000000, next=6
-./tb/LDL_round_tb.sv:55: $finish called at 150 (1ns)
+req=00000000, ack=x, bin=x, hot=xxxxxxxx
+req=00000000, ack=0, bin=0, hot=00000000
+req=10100101, ack=1, bin=0, hot=00000001
+req=10100101, ack=1, bin=2, hot=00000100
+req=10100101, ack=1, bin=5, hot=00100000
+req=10100101, ack=1, bin=7, hot=10000000
+req=10100101, ack=1, bin=0, hot=00000001
+req=10100101, ack=1, bin=2, hot=00000100
+req=10100101, ack=1, bin=5, hot=00100000
+req=10100101, ack=1, bin=7, hot=10000000
+req=00000000, ack=0, bin=6, hot=00000000
+./tb/LDL_round_tb.sv:56: $finish called at 150 (1ns)

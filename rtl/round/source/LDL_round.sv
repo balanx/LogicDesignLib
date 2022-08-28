@@ -16,34 +16,36 @@
 
 module  LDL_round
 #(parameter
-    WIDTH = 8
+    BIN_WIDTH = 3
+   ,REQ_WIDTH = 1 << BIN_WIDTH
 )(
-     input                             clk
-   , input                             rst_n  // 0 is reset
-   , input       [WIDTH -1:0]          req
-   ,output                             ack
-   ,output       [$clog2(WIDTH) -1:0]  bin
-   ,output       [WIDTH -1:0]          hot
+     input                          clk
+   , input                          rst_n  // 0 is reset
+   , input       [REQ_WIDTH -1:0]   req
+   ,output                          ack
+   ,output       [BIN_WIDTH -1:0]   bin
+   ,output       [REQ_WIDTH -1:0]   hot
 );
 
-reg  [$clog2(WIDTH) -1:0]  next;
-wire [WIDTH -1: 0]  req_shift;
+reg  [BIN_WIDTH -1:0]  next;
+wire [REQ_WIDTH -1:0]  req_shift;
 
-LDL_ring_shift_right #(
-        .WIDTH                  ( WIDTH                  ) 
+LDL_ring_shift #(
+        .WIDTH                  ( REQ_WIDTH              ) 
     )
-    ring_shift_right (
-        .sel                    ( next                   ), // input [$clog2(WIDTH)-1:0]
+    ring_shift (
+        .dir                    ( 0                      ), // input
+        .step                   ( next                   ), // input [$clog2(WIDTH)-1:0]
         .x                      ( req                    ), // input [WIDTH-1:0]
         .y                      ( req_shift              )  //output [WIDTH-1:0]
     );
 
-wire [$clog2(WIDTH) -1:0]  bin_shift;
+wire [BIN_WIDTH -1:0]  bin_shift;
 
-LDL_pri_enc #(
-        .WIDTH                  ( WIDTH                  ) 
+LDL_hot2bin_pri #(
+        .BIN_WIDTH              ( BIN_WIDTH              ) 
     )
-    pri_enc (
+    hot2bin_pri (
         .x                      ( req_shift              ), // input [WIDTH-1:0]
         .y                      ( bin_shift              ), //output [$clog2(WIDTH)-1:0]
         .valid                  ( ack                    )  //output 
@@ -55,12 +57,12 @@ assign  bin  =  bin_shift + next;
 always @(posedge clk) begin
     if (!rst_n)
         next <= '0;
-    else
-        next <= bin + ack;
+    else if (ack)
+        next <= bin + 1;
 end
 
 LDL_bin2hot #(
-        .WIDTH                  ( $clog2(WIDTH)          ) 
+        .BIN_WIDTH              ( BIN_WIDTH              ) 
     )
     bin2hot (
         .en                     ( ack                    ), // input

@@ -1,0 +1,28 @@
+VCD info: dumpfile dump.vcd opened for output.
+VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
+cos=0000, req=00000000, ack=x, bin=x, hot=xxxxxxxx
+cos=0000, req=10100101, ack=1, bin=0, hot=00000001
+cos=0000, req=10100101, ack=1, bin=2, hot=00000100
+cos=0000, req=10100101, ack=1, bin=5, hot=00100000
+cos=0000, req=10100101, ack=1, bin=7, hot=10000000
+cos=0000, req=10100101, ack=1, bin=0, hot=00000001
+cos=0000, req=10100101, ack=1, bin=2, hot=00000100
+cos=0000, req=10100101, ack=1, bin=5, hot=00100000
+cos=0000, req=10100101, ack=1, bin=7, hot=10000000
+cos=0000, req=00000000, ack=0, bin=6, hot=00000000
+cos=e4e4, req=11111111, ack=1, bin=7, hot=10000000
+cos=e4e4, req=11111111, ack=1, bin=3, hot=00001000
+cos=e4e4, req=11111111, ack=1, bin=7, hot=10000000
+cos=e4e4, req=11111111, ack=1, bin=3, hot=00001000
+cos=e4e4, req=00000000, ack=0, bin=0, hot=00000000
+cos=2424, req=11111111, ack=1, bin=2, hot=00000100
+cos=2424, req=11111111, ack=1, bin=6, hot=01000000
+cos=2424, req=11111111, ack=1, bin=2, hot=00000100
+cos=2424, req=11111111, ack=1, bin=6, hot=01000000
+cos=2424, req=00000000, ack=0, bin=3, hot=00000000
+cos=0404, req=11111111, ack=1, bin=5, hot=00100000
+cos=0404, req=11111111, ack=1, bin=1, hot=00000010
+cos=0404, req=11111111, ack=1, bin=5, hot=00100000
+cos=0404, req=11111111, ack=1, bin=1, hot=00000010
+cos=0404, req=00000000, ack=0, bin=6, hot=00000000
+./tb/LDL_round_pri_tb.sv:72: $finish called at 230 (1ns)
