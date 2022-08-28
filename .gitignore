@@ -1,0 +1,6 @@
+tags
+*.swp
+*.out
+obj_dir
+*.vcd
+
