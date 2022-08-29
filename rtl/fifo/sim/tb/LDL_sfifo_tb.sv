@@ -72,7 +72,7 @@ initial begin
         @(negedge clk) ;
     end
 
-    @(negedge clk) SHOW();
+    @(negedge clk) ;
     @(negedge clk) we = 1;
     repeat(10) begin
         @(negedge clk) din = din + 1;
@@ -81,18 +81,10 @@ initial begin
 end
 
 initial begin
-    $display("     time : dout empty full count");
-
-    forever @(posedge clk)
-        if (~empty & re)
-            SHOW();
+    $display("     time : re  dout empty full count  we");
+    $monitor("%9d : %b    %h    %b    %b    %2d    %b", $time, re, dout, empty, full, count, we);
 end
 
-task SHOW;
-begin
-    $display("%9d :  %h    %b     %b     %2d", $time, dout, empty, full, count);
-end
-endtask
 
 endmodule // Logic Design Lib.
 

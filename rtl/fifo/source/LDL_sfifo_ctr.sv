@@ -53,7 +53,7 @@ always @(posedge clk) begin
         empty_d  <=   1;
     end
     else begin
-        empty_d  <=  ~mr;
+        empty_d  <=  empty_d ? ~mr : (w_pt == r_pt);
 
         if (~full  & we) w_pt <= w_pt + 1'b1;
         if (~empty & re) r_pt <= r_pt + 1'b1;
