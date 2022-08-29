@@ -25,8 +25,9 @@ module  LDL_round_pri
    , input       [REQ_WIDTH -1:0]   req
    , input       [REQ_WIDTH -1:0][COS_WIDTH -1:0]   cos // 0 is the lowest
    ,output                          ack
-   ,output       [BIN_WIDTH -1:0]   bin
    ,output       [REQ_WIDTH -1:0]   hot
+   ,output       [BIN_WIDTH -1:0]   bin
+   ,output       [BIN_WIDTH -1:0]   pre_bin
 );
 
 
@@ -56,8 +57,9 @@ LDL_round #(
         .rst_n                  ( rst_n                  ), // input
         .req                    ( max_req                ), // input[REQ_WIDTH-1:0]
         .ack                    ( ack                    ), //output
+        .hot                    ( hot                    ), //output[REQ_WIDTH-1:0]
         .bin                    ( bin                    ), //output[BIN_WIDTH-1:0]
-        .hot                    ( hot                    )  //output[REQ_WIDTH-1:0]
+        .pre_bin                ( pre_bin                )  //output[BIN_WIDTH-1:0]
     );
 
 

@@ -23,19 +23,19 @@ module  LDL_round
    , input                          rst_n  // 0 is reset
    , input       [REQ_WIDTH -1:0]   req
    ,output                          ack
-   ,output       [BIN_WIDTH -1:0]   bin
    ,output       [REQ_WIDTH -1:0]   hot
+   ,output       [BIN_WIDTH -1:0]   bin
+   ,output reg   [BIN_WIDTH -1:0]   pre_bin
 );
 
-reg  [BIN_WIDTH -1:0]  next;
 wire [REQ_WIDTH -1:0]  req_shift;
 
 LDL_ring_shift #(
         .WIDTH                  ( REQ_WIDTH              ) 
     )
     ring_shift (
-        .dir                    ( 0                      ), // input
-        .step                   ( next                   ), // input [$clog2(WIDTH)-1:0]
+        .dir                    ( 1'b0                   ), // input
+        .step                   ( pre_bin + 1'b1         ), // input [$clog2(WIDTH)-1:0]
         .x                      ( req                    ), // input [WIDTH-1:0]
         .y                      ( req_shift              )  //output [WIDTH-1:0]
     );
@@ -52,13 +52,13 @@ LDL_hot2bin_pri #(
     );
 
 
-assign  bin  =  bin_shift + next;
+assign  bin  =  bin_shift + pre_bin + 1;
 
 always @(posedge clk) begin
     if (!rst_n)
-        next <= '0;
+        pre_bin <= '1;
     else if (ack)
-        next <= bin + 1;
+        pre_bin <= bin;
 end
 
 LDL_bin2hot #(

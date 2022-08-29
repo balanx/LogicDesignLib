@@ -26,7 +26,7 @@ reg                      clk   = 0;
 reg                      rst_n = 0;
 reg    [REQ_WIDTH -1:0]  req   = 0;
 wire                     ack;
-wire   [BIN_WIDTH -1:0]  bin;
+wire   [BIN_WIDTH -1:0]  bin, pre_bin;
 wire   [REQ_WIDTH -1:0]  hot;
 
 always #5 clk = ~clk;
@@ -39,8 +39,9 @@ LDL_round #(
         .rst_n                  ( rst_n                  ), // input
         .req                    ( req                    ), // input[WIDTH-1:0]
         .ack                    ( ack                    ), //output
+        .hot                    ( hot                    ), //output[WIDTH-1:0]
         .bin                    ( bin                    ), //output[$clog2(WIDTH)-1:0]
-        .hot                    ( hot                    )  //output[WIDTH-1:0]
+        .pre_bin                ( pre_bin                )  //output[BIN_WIDTH-1:0]
     );
 
 

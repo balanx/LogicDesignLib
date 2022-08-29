@@ -11,4 +11,4 @@ req=10100101, ack=1, bin=2, hot=00000100
 req=10100101, ack=1, bin=5, hot=00100000
 req=10100101, ack=1, bin=7, hot=10000000
 req=00000000, ack=0, bin=6, hot=00000000
-./tb/LDL_round_tb.sv:56: $finish called at 150 (1ns)
+./tb/LDL_round_tb.sv:57: $finish called at 150 (1ns)
