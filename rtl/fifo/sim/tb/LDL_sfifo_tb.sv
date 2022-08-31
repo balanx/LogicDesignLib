@@ -68,15 +68,35 @@ initial begin
         @(negedge clk) din = din + 1;
     end
     @(negedge clk) we = 0;  re = 1;
-    repeat(20) begin
-        @(negedge clk) ;
-    end
+    repeat(20) @(negedge clk);
 
-    @(negedge clk) ;
-    @(negedge clk) we = 1;
+    // d * d d d
+    @(negedge clk) we = 1; din = din + 1;
+    @(negedge clk) we = 0;
+    @(negedge clk) we = 1; din = din + 1;
     repeat(10) begin
         @(negedge clk) din = din + 1;
     end
+
+    // d d * d d d
+    @(negedge clk) we = 0;
+    repeat(10) @(negedge clk);
+    @(negedge clk) we = 1; din = din + 1;
+    @(negedge clk) din = din + 1;
+    @(negedge clk) we = 0;
+    @(negedge clk) we = 1; din = din + 1;
+    @(negedge clk) din = din + 1;
+    @(negedge clk) we = 0;
+
+    repeat(10) @(negedge clk);
+    re = 0; we = 1; din = din + 1;
+    @(negedge clk) we = 0;
+    @(negedge clk) we = 1; re = 1; din = din + 1;
+    @(negedge clk) re = 0; din = din + 1;
+    @(negedge clk) re = 1; din = din + 1;
+    @(negedge clk) din = din + 1;
+    @(negedge clk) we = 0;
+
     #20 $finish;
 end
 

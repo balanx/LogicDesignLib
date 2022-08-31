@@ -23,7 +23,7 @@ module  LDL_sfifo_ctr
    , input                     rst_n  // 0 is reset
    , input                     we     // fifo write
    , input                     re     // fifo read
-   ,output                     empty  // = ~valid
+   ,output reg                 empty  // = ~valid
    ,output                     full   // = ~ready
    ,output       [AWIDTH -1:0] wa     // mem write address
    ,output       [AWIDTH -1:0] ra     // mem read  address
@@ -32,31 +32,40 @@ module  LDL_sfifo_ctr
    ,output       [AWIDTH   :0] count
 );
 
+wire    fw = (~full  & we);
+wire    fr = (~empty & re);
+//
 reg  [AWIDTH : 0]  w_pt, r_pt;
+
 assign  wa    =  w_pt[AWIDTH-1:0];
-assign  ra    =  r_pt[AWIDTH-1:0] + (AHEAD ? (~empty & re) : 0);
+assign  ra    =  r_pt[AWIDTH-1:0] + (AHEAD ? fr : '0);
 assign  count = (w_pt  - r_pt);
 assign  full  = (w_pt[AWIDTH] != r_pt[AWIDTH] && w_pt[AWIDTH-1:0] == r_pt[AWIDTH-1:0]);
 //
-assign  mw    = ~full & we;
+assign  mw    =  fw;
 assign  mr    = (w_pt != r_pt);
 
-//For sync with memory read delay,
-//empty delay 1 cycle when 'mr' 0->1, but NO delay when 1->0.
-reg     empty_d;
-assign  empty =  mr ? empty_d : ~mr;
+//For sync with memory read delay, empty delay 1 cycle.
+wire [AWIDTH : 0]  next_r = r_pt + 1;
 
 always @(posedge clk) begin
     if (!rst_n) begin
         w_pt  <=  '0;
         r_pt  <=  '0;
-        empty_d  <=   1;
+        empty <=   1;
     end
     else begin
-        empty_d  <=  empty_d ? ~mr : (w_pt == r_pt);
+        //r_pt NOT exceed w_pt
+        if (fr && (next_r == w_pt) )
+            empty  <=  1 ;
+        else
+            empty  <= ~mr; 
 
-        if (~full  & we) w_pt <= w_pt + 1'b1;
-        if (~empty & re) r_pt <= r_pt + 1'b1;
+        if (fw) w_pt <= w_pt + 1'b1;
+
+        //r_pt NOT exceed w_pt
+        if (fr && mr)
+            r_pt <= r_pt + 1'b1;
     end
 end
 
