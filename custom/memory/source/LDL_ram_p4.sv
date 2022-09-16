@@ -14,7 +14,7 @@
 // 2022/08/13   热干面       1.0          Original
 // -FHDR------------------------------------------------------------------------
 
-module  LDL_ram_p2f
+module  LDL_ram_p4
 #(parameter
     DWIDTH = 8
    ,AWIDTH = 4
@@ -59,6 +59,7 @@ end
 integer  i;
 
 initial begin
+    $display("@%m : RAM_P4 : %d : %d", DWIDTH, AWIDTH);
     for (i=0; i<DEPTH; i++)
         mem[i] = ($random > 0) ? '1 : '0;
 end

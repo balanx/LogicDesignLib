@@ -49,6 +49,7 @@ end
 integer  i;
 
 initial begin
+    $display("@%m : RAM_P2 : %d : %d", DWIDTH, AWIDTH);
     for (i=0; i<DEPTH; i++)
         mem[i] = ($random > 0) ? '1 : '0;
 end
