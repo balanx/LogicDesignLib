@@ -22,50 +22,69 @@ module  LDL_round
      input                          clk
    , input                          rst_n  // 0 is reset
    , input       [REQ_WIDTH -1:0]   req
-   ,output                          ack
+   , input                          ready
+   ,output reg                      valid
    ,output       [REQ_WIDTH -1:0]   hot
-   ,output       [BIN_WIDTH -1:0]   bin
-   ,output reg   [BIN_WIDTH -1:0]   pre_bin
+   ,output reg   [BIN_WIDTH -1:0]   bin
 );
 
-wire [REQ_WIDTH -1:0]  req_shift;
 
-LDL_ring_shift #(
-        .WIDTH                  ( REQ_WIDTH              ) 
-    )
-    ring_shift (
-        .dir                    ( 1'b0                   ), // input
-        .step                   ( pre_bin + 1'b1         ), // input [$clog2(WIDTH)-1:0]
-        .x                      ( req                    ), // input [WIDTH-1:0]
-        .y                      ( req_shift              )  //output [WIDTH-1:0]
-    );
+//e.g. bin = 1
+//msb_mask = 1100
+//lsb_mask = 0011
+reg  [REQ_WIDTH -1:0]  msb_mask = '0;
+always @* begin
+    msb_mask = '1;
+    msb_mask =  msb_mask << (bin + 1'b1);
+end
 
-wire [BIN_WIDTH -1:0]  bin_shift;
+reg  [REQ_WIDTH -1:0]  lsb_mask = '0;
+always @* begin
+    lsb_mask = ~msb_mask;
+    lsb_mask[bin] =  ~valid; // req -> bin ，即轮询过了
+end
+
+wire [BIN_WIDTH -1:0]  msb_bin, lsb_bin;
 
 LDL_hot2bin_pri #(
-        .BIN_WIDTH              ( BIN_WIDTH              ) 
+        .BIN_WIDTH              ( BIN_WIDTH              )
     )
-    hot2bin_pri (
-        .x                      ( req_shift              ), // input [WIDTH-1:0]
-        .y                      ( bin_shift              ), //output [$clog2(WIDTH)-1:0]
-        .valid                  ( ack                    )  //output 
+    msb_pri (
+        .x                      ( req & msb_mask         ), // input [WIDTH-1:0]
+        .y                      ( msb_bin                ), //output [$clog2(WIDTH)-1:0]
+        .valid                  ( msb_vld                )  //output 
     );
 
 
-assign  bin  =  bin_shift + pre_bin + 1;
+LDL_hot2bin_pri #(
+        .BIN_WIDTH              ( BIN_WIDTH              )
+    )
+    lsb_pri (
+        .x                      ( req & lsb_mask         ), // input [WIDTH-1:0]
+        .y                      ( lsb_bin                ), //output [$clog2(WIDTH)-1:0]
+        .valid                  ( lsb_vld                )  //output 
+    );
+
+wire  vld = msb_vld | lsb_vld;
 
 always @(posedge clk) begin
-    if (!rst_n)
-        pre_bin <= '1;
-    else if (ack)
-        pre_bin <= bin;
+    if (!rst_n) begin
+        valid <=  0;
+        bin <=  0;
+    end
+    else if (~valid || ready) begin
+        valid <= vld;
+        if (vld) // 有新请求才变 bin
+            bin <= msb_vld ? msb_bin : lsb_bin;
+    end
 end
+
 
 LDL_bin2hot #(
         .BIN_WIDTH              ( BIN_WIDTH              ) 
     )
     bin2hot (
-        .en                     ( ack                    ), // input
+        .en                     ( valid                  ), // input
         .x                      ( bin                    ), // input [WIDTH-1:0]
         .y                      ( hot                    )  //output [(1<<WIDTH)-1:0]
     );
