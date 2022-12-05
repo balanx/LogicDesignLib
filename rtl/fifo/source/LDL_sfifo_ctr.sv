@@ -45,9 +45,7 @@ assign  full  = (w_pt[AWIDTH] != r_pt[AWIDTH] && w_pt[AWIDTH-1:0] == r_pt[AWIDTH
 assign  mw    =  fw;
 assign  mr    = (w_pt != r_pt);
 
-//For sync with memory read delay, empty delay 1 cycle.
-wire [AWIDTH : 0]  next_r = r_pt + 1;
-
+//
 always @(posedge clk) begin
     if (!rst_n) begin
         w_pt  <=  '0;
@@ -55,17 +53,15 @@ always @(posedge clk) begin
         empty <=   1;
     end
     else begin
-        //r_pt NOT exceed w_pt
-        if (fr && (next_r == w_pt) )
-            empty  <=  1 ;
-        else
-            empty  <= ~mr; 
+        //one data only
+        if (fr && (count == 1) )
+            empty  <=  1;
+        else if (mr) //one cycle delay
+            empty  <=  0;
 
         if (fw) w_pt <= w_pt + 1'b1;
 
-        //r_pt NOT exceed w_pt
-        if (fr && mr)
-            r_pt <= r_pt + 1'b1;
+        if (fr) r_pt <= r_pt + 1'b1;
     end
 end
 
