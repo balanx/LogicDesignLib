@@ -1,18 +1,4 @@
-// +FHDR------------------------------------------------------------------------
-// Project Name  : LogicDesignLib
-// Author        : 热干面
-// Email         : tobalanx@qq.com
-// Website       : https://github.com/balanx/LogicDesignLib
-// Created On    : 2022/08/23
-//
-// Description   : 
-// 
-// -----------------------------------------------------------------------------
-// Modification History:
-// Date         By           Version      Change Description
-// -----------------------------------------------------------------------------
-// 2022/08/23   热干面    1.0          Original
-// -FHDR------------------------------------------------------------------------
+// https://github.com/balanx/LogicDesignLib
 
 module LDL_crc32_dn
 #(parameter

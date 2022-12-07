@@ -1,3 +1,4 @@
+// https://github.com/balanx/LogicDesignLib
 
 module  LDL_cdc_bus
 #(parameter

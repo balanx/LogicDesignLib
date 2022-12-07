@@ -1,18 +1,4 @@
-// +FHDR------------------------------------------------------------------------
-// Project Name  : LogicDesignLib
-// Author        : 热干面
-// Email         : tobalanx@qq.com
-// Website       : https://github.com/balanx/LogicDesignLib
-// Created On    : 2022/09/16
-//
-// Description   : 
-// 
-// -----------------------------------------------------------------------------
-// Modification History:
-// Date         By           Version      Change Description
-// -----------------------------------------------------------------------------
-// 2022/09/16   热干面       1.0          Original
-// -FHDR------------------------------------------------------------------------
+// https://github.com/balanx/LogicDesignLib
 
 module LDL_parity_check
 #(
