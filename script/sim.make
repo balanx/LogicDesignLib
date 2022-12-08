@@ -1,15 +1,15 @@
 ## https://github.com/balanx/LogicDesignLib
 
-.PHONY: clean wave gold sim all help $(module)
+.PHONY: clean wave gold sim all help $(case)
 
-IVL  =  iverilog -g2012
+IVL  =  iverilog -g2012 -I ../../../include
 
 SRC = $(SRC_$(basename $1))
 
 help:
 	@echo "Make Target Lists:"
 	@echo "  all            run all"
-	@echo "  module-name    i.e. {$(module)}"
+	@echo "  case-name      i.e. {$(case)}"
 	@echo "  sim            vvp running"
 	@echo "  wave           gtkwave dump.vcd"
 	@echo "  gold           compare log with gold"
@@ -18,9 +18,9 @@ help:
 	@echo "Pls. visit https://github.com/balanx/LogicDesignLib"
 
 
-all : $(module)
+all : $(case)
 
-$(module) : % : %.log
+$(case) : % : %.log
 
 %.out : clean
 	$(IVL)  -D $(shell echo $(basename $@) | tr a-z A-Z)  -o $@  $(call SRC,$@)
