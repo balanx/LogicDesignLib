@@ -1,3 +1,4 @@
+Ram@LDL_sfifo_v1_tb.dut.p2ram_rs : LDL_p2ram_rs_v1 :           8 :           16
 VCD info: dumpfile dump.vcd opened for output.
 VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
      time : re  dout empty full count  we
@@ -81,4 +82,4 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       890 : 1    c7    0    0     2    0
       895 : 1    c8    0    0     1    0
       905 : 1    c9    1    0     0    0
-./tb/LDL_sfifo_tb.sv:100: $finish called at 910 (1ns)
+./tb/LDL_sfifo_v1_tb.sv:88: $finish called at 910 (1ns)

@@ -2,24 +2,24 @@
 
 module  LDL_p2ram_ra_v1
 #(parameter
-    DWIDTH = 8
-   ,DEEPTH = 10
-   ,AWIDTH = $clog2(DEEPTH)
+    DW = 8
+   ,DEPTH = 10
+   ,AW = $clog2(DEPTH)
 )(
      input                   wclk
    , input                   we
-   , input     [AWIDTH -1:0] wa
-   , input     [DWIDTH -1:0] din
+   , input     [AW -1:0]     wa
+   , input     [DW -1:0]     din
 
    , input                   rclk
    , input                   re
-   , input     [AWIDTH -1:0] ra
-   ,output reg [DWIDTH -1:0] dout
+   , input     [AW -1:0]     ra
+   ,output reg [DW -1:0]     dout
 );
 
 
 //(* ramstyle = "auto" *)
-reg  [DWIDTH -1:0]  mem [DEEPTH -1:0];
+reg  [DW -1:0]  mem [DEPTH -1:0];
 
 always @(posedge wclk) begin
     if (we)
@@ -33,9 +33,9 @@ end
 
 // synthesis translate_off
 initial begin
-    $display("Ram@%m : LDL_p2ram_ra_v1 : %d : %d", DWIDTH, DEEPTH);
+    $display("Ram@%m : LDL_p2ram_ra_v1 : %d : %d", DW, DEPTH);
 
-    for (integer i=0; i<DEEPTH; i++)
+    for (integer i=0; i<DEPTH; i++)
         mem[i] = ($random > 0) ? '1 : '0;
 end
 // synthesis translate_on

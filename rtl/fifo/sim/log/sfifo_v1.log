@@ -1,3 +1,4 @@
+Ram@LDL_sfifo_v1_tb.dut.p2ram_rs : LDL_p2ram_rs_v1 :           8 :           16
 VCD info: dumpfile dump.vcd opened for output.
 VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
      time : re  dout empty full count  we
@@ -42,6 +43,7 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       450 : 1    a0    1    0     1    0
       455 : 1    b5    0    0     1    0
       460 : 1    b5    0    0     1    1
+Warning : @LDL_sfifo_v1_tb.dut.p2ram_rs : read & write on the same address (0x1) at         0 ns
       465 : 1    a1    1    0     1    1
       475 : 1    b6    0    0     2    1
       485 : 1    b7    0    0     2    1
@@ -62,6 +64,7 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       700 : 1    c1    0    0     2    0
       705 : 1    c2    0    0     1    0
       710 : 1    c2    0    0     1    1
+Warning : @LDL_sfifo_v1_tb.dut.p2ram_rs : read & write on the same address (0xe) at         0 ns
       715 : 1    ae    1    0     1    1
       725 : 1    c3    0    0     2    1
       730 : 1    c3    0    0     2    0
@@ -72,6 +75,7 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       840 : 0    b5    1    0     1    0
       845 : 0    c5    0    0     1    0
       850 : 1    c5    0    0     1    1
+Warning : @LDL_sfifo_v1_tb.dut.p2ram_rs : read & write on the same address (0x1) at         0 ns
       855 : 1    b6    1    0     1    1
       860 : 0    b6    1    0     1    1
       865 : 0    c6    0    0     2    1
@@ -81,4 +85,4 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       890 : 1    c8    0    0     2    0
       895 : 1    c9    0    0     1    0
       905 : 1    ba    1    0     0    0
-./tb/LDL_sfifo_tb.sv:100: $finish called at 910 (1ns)
+./tb/LDL_sfifo_v1_tb.sv:88: $finish called at 910 (1ns)

@@ -2,9 +2,9 @@
 
 `timescale  1ns/1ns
 
-module  LDL_sfifo_tb;
+module  LDL_sfifo_v1_tb;
 
-`ifdef SFIFO_NO_AHEAD
+`ifdef SFIFO_V1_NO_AHEAD
 parameter
     AHEAD = 0;
 `else
@@ -13,42 +13,43 @@ parameter
 `endif
 
 parameter
-    DWIDTH = 8,
-    AWIDTH = 4;
+    DW = 8,
+    AW = 4;
 
 reg                      clk   = 0;
-reg                      rst_n = 0;
+reg                      rst   = 1;
 reg                      we    = 0;
 reg                      re    = 0;
-reg        [DWIDTH -1:0] din   = 'ha0;
+reg        [DW -1:0]     din   = 'ha0;
 wire                     empty;
 wire                     full;
-wire       [DWIDTH -1:0] dout;
-wire       [AWIDTH   :0] count;
+wire       [DW -1:0]     dout;
+wire       [AW   :0]     wcnt, rcnt;
 
 always #5 clk = ~clk;
 
-LDL_sfifo #(
-        .DWIDTH                 ( DWIDTH                 ),
-        .AWIDTH                 ( AWIDTH                 ),
-        .AHEAD                  ( AHEAD                  )
+LDL_sfifo_v1 #(
+        .DW                     ( DW                     ),
+        .AW                     ( AW                     ),
+        .AHEAD                  ( AHEAD                  ) 
     )
     dut (
-        .clk                    ( clk                    ), // input
-        .rst_n                  ( rst_n                  ), // input
-        .we                     ( we                     ), // input
-        .re                     ( re                     ), // input
-        .din                    ( din                    ), // input[DWIDTH-1:0]
-        .empty                  ( empty                  ), //output
-        .full                   ( full                   ), //output
-        .dout                   ( dout                   ), //output[DWIDTH-1:0]
-        .count                  ( count                  )  //output[AWIDTH:0]
+        .clk                    ( clk                    ), //I
+        .rst                    ( rst                    ), //I
+        .we                     ( we                     ), //I
+        .re                     ( re                     ), //I
+        .din                    ( din                    ), //I [DW-1:0]
+        .empty                  ( empty                  ), //O
+        .full                   ( full                   ), //O
+        .dout                   ( dout                   ), //O [DW-1:0]
+        .wcnt                   ( wcnt                   ), //O [AW:0]
+        .rcnt                   ( rcnt                   )  //O [AW:0]
     );
 
 
 initial begin
     $dumpvars(0);
-    #20  rst_n  = 1;
+    #20  rst   = 0;
 
     @(negedge clk) we = 1;
     repeat(20) begin
@@ -89,7 +90,7 @@ end
 
 initial begin
     $display("     time : re  dout empty full count  we");
-    $monitor("%9d : %b    %h    %b    %b    %2d    %b", $time, re, dout, empty, full, count, we);
+    $monitor("%9d : %b    %h    %b    %b    %2d    %b", $time, re, dout, empty, full, wcnt, we);
 end
 
 
