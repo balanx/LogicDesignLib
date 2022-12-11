@@ -24,7 +24,7 @@ LDL_cdc_hand_v1 #(
         .tx_rst                 ( tx_rst                 ), //I 
         .rx_clk                 ( rx_clk                 ), //I 
         .rx_rst                 ( rx_rst                 ), //I 
-        .num                    ( 8'd6                   ), //I [WIDTH-1:0]
+        .interval               ( 8'd6                   ), //I [WIDTH-1:0]
         .din                    ( din                    ), //I [WIDTH-1:0]
         .dout                   ( dout                   )  //O [WIDTH-1:0]
     );

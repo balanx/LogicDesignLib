@@ -1,9 +1,10 @@
 // https://github.com/balanx/LogicDesignLib
 
-module  LDL_afifo_v1
+module  LDL_afifo_hand_v1
 #(parameter
     DW  = 8
    ,AW  = 8
+   ,CW  = 8
    ,LEVEL = 2  // min. is 2
    ,AHEAD  = 1 //1 is mem_read_address ahead
 )(
@@ -17,6 +18,8 @@ module  LDL_afifo_v1
    ,output                  empty
    ,output                  full
    ,output       [DW -1:0]  dout
+   , input       [CW -1:0]  w_interval
+   , input       [CW -1:0]  r_interval
    ,output       [AW   :0]  wcnt
    ,output       [AW   :0]  rcnt
 );
@@ -62,8 +65,9 @@ LDL_fifo_rs_v1 #(
     );
 
 
-LDL_cdc_ring_v1 #(
-        .WIDTH                  ( AW + 1                 ),
+LDL_cdc_hand_v1 #(
+        .DW                     ( AW + 1                 ),
+        .CW                     ( CW                     ),
         .LEVEL                  ( LEVEL                  )
     )
     fifo_w2r
@@ -72,13 +76,15 @@ LDL_cdc_ring_v1 #(
         .tx_rst                 ( w_rst                  ), //I
         .rx_clk                 ( r_clk                  ), //I
         .rx_rst                 ( r_rst                  ), //I
-        .din                    ( w_pt                   ), //I [WIDTH-1:0]
-        .dout                   ( w_pt2r                 )  //O [WIDTH-1:0]
+        .interval               ( w_interval             ), //I [CW-1:0]
+        .din                    ( w_pt                   ), //I [DW-1:0]
+        .dout                   ( w_pt2r                 )  //O [DW-1:0]
     );
 
 
-LDL_cdc_ring_v1 #(
-        .WIDTH                  ( AW + 1                 ),
+LDL_cdc_hand_v1 #(
+        .DW                     ( AW + 1                 ),
+        .CW                     ( CW                     ),
         .LEVEL                  ( LEVEL                  )
     )
     fifo_r2w
@@ -87,8 +93,9 @@ LDL_cdc_ring_v1 #(
         .tx_rst                 ( w_rst                  ), //I
         .rx_clk                 ( r_clk                  ), //I
         .rx_rst                 ( r_rst                  ), //I
-        .din                    ( r_pt                   ), //I [WIDTH-1:0]
-        .dout                   ( r_pt2w                 )  //O [WIDTH-1:0]
+        .interval               ( r_interval             ), //I [CW-1:0]
+        .din                    ( r_pt                   ), //I [DW-1:0]
+        .dout                   ( r_pt2w                 )  //O [DW-1:0]
     );
 
 
