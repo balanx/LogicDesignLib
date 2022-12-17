@@ -17,4 +17,4 @@ dir=1, s=5, x=a5, y=10110100
 dir=1, s=6, x=a5, y=01101001
 dir=1, s=7, x=a5, y=11010010
 dir=1, s=0, x=a5, y=10100101
-./tb/LDL_ring_shift_tb.sv:53: $finish called at 110 (1ns)
+./tb/LDL_shift_ring_v1_tb.sv:40: $finish called at 110 (1ns)

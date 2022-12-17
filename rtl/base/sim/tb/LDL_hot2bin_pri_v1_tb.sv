@@ -2,7 +2,7 @@
 
 `timescale  1ns/1ns
 
-module  LDL_hot2bin_pri_tb;
+module  LDL_hot2bin_pri_v1_tb;
 
 
 parameter
@@ -12,7 +12,7 @@ reg        [(1<<WIDTH) -1:0] x = 0;
 wire       [WIDTH -1:0] y;
 wire                    valid;
 
-LDL_hot2bin_pri #(
+LDL_hot2bin_pri_v1 #(
         .BIN_WIDTH      ( WIDTH          ) 
     )
     dut (

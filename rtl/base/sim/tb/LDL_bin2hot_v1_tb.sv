@@ -2,7 +2,7 @@
 
 `timescale  1ns/1ns
 
-module  LDL_bin2hot_tb;
+module  LDL_bin2hot_v1_tb;
 
 
 parameter
@@ -12,7 +12,7 @@ reg                     en = 0;
 reg        [WIDTH -1:0] x  = 0;
 wire       [(1<<WIDTH) -1:0] y;
 
-LDL_bin2hot #(
+LDL_bin2hot_v1 #(
         .BIN_WIDTH      ( WIDTH          ) 
     )
     dut (

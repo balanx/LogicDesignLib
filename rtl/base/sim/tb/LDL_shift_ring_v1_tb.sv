@@ -2,7 +2,7 @@
 
 `timescale  1ns/1ns
 
-module  LDL_ring_shift_tb;
+module  LDL_shift_ring_v1_tb;
 
 
 parameter
@@ -13,7 +13,7 @@ reg        [WIDTH -1:0] x = 0;
 wire       [WIDTH -1:0] y;
 reg                     dir = 0;
 
-LDL_ring_shift #(
+LDL_shift_ring_v1 #(
         .WIDTH          ( WIDTH          ) 
     )
     dut (

@@ -17,4 +17,4 @@ en=1, x=e, y=4000
 en=1, x=f, y=8000
 en=1, x=0, y=0001
 en=0, x=0, y=0000
-./tb/LDL_bin2hot_tb.sv:47: $finish called at 110 (1ns)
+./tb/LDL_bin2hot_v1_tb.sv:34: $finish called at 110 (1ns)

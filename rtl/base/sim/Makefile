@@ -1,20 +1,20 @@
-module 	:=  	\
-		ring_shift		\
-		bin2hot 		\
-		hot2bin_pri
+case 	:=  	\
+		shift_ring_v1	\
+		bin2hot_v1 		\
+		hot2bin_pri_v1
 
-SRC_bin2hot  =  \
-		../source/LDL_bin2hot.sv      	\
-	    ./tb/LDL_bin2hot_tb.sv
+SRC_bin2hot_v1  =       \
+		../source/LDL_bin2hot_v1.sv         \
+	    ./tb/LDL_bin2hot_v1_tb.sv
 
-SRC_hot2bin_pri  =  \
-		../source/LDL_hot2bin_pri.sv     \
-	    ./tb/LDL_hot2bin_pri_tb.sv
+SRC_hot2bin_pri_v1  =   \
+		../source/LDL_hot2bin_pri_v1.sv     \
+	    ./tb/LDL_hot2bin_pri_v1_tb.sv
 
-SRC_ring_shift  =  \
-		../source/LDL_ring_shift.sv \
-	    ./tb/LDL_ring_shift_tb.sv
+SRC_shift_ring_v1  =    \
+		../source/LDL_shift_ring_v1.sv      \
+	    ./tb/LDL_shift_ring_v1_tb.sv
 
 
-include ../../../make.sim
+include ../../../script/sim.make
 

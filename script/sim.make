@@ -1,6 +1,6 @@
 ## https://github.com/balanx/LogicDesignLib
 
-.PHONY: clean wave gold sim all help $(case)
+.PHONY: clean wave diff sim all help $(case)
 
 IVL  =  iverilog -g2012 -I ../../../include
 
@@ -12,7 +12,7 @@ help:
 	@echo "  case-name      i.e. {$(case)}"
 	@echo "  sim            vvp running"
 	@echo "  wave           gtkwave dump.vcd"
-	@echo "  gold           compare log with gold"
+	@echo "  diff           compare *.log with log/*"
 	@echo "  clean          delete working files"
 	@echo
 	@echo "Pls. visit https://github.com/balanx/LogicDesignLib"
@@ -28,7 +28,7 @@ $(case) : % : %.log
 %.log : %.out
 	vvp  -l $@  ./$(basename $@).out
 
-gold :
+diff :
 	@for i in `ls *.log` ; do diff -sq $$i ./log/$$i ; done
 
 wave :
