@@ -2,7 +2,7 @@
 
 `timescale  1ns/1ns
 
-module  LDL_round_tb;
+module  LDL_rr_v1_tb;
 
 
 parameter
@@ -10,7 +10,7 @@ parameter
     REQ_WIDTH = 1 << BIN_WIDTH;
 
 reg                      clk   = 0;
-reg                      rst_n = 0;
+reg                      rst   = 1;
 reg    [REQ_WIDTH -1:0]  req   = 0;
 reg                      ready = 1;
 wire   [BIN_WIDTH -1:0]  bin;
@@ -19,12 +19,12 @@ wire                     valid;
 
 always #5 clk = ~clk;
 
-LDL_round #(
+LDL_rr_v1 #(
         .BIN_WIDTH              ( BIN_WIDTH              ) 
     )
     dut (
         .clk                    ( clk                    ), // input
-        .rst_n                  ( rst_n                  ), // input
+        .rst                    ( rst                    ), // input
         .req                    ( req                    ), // input[WIDTH-1:0]
         .ready                  ( ready                  ), // input
         .valid                  ( valid                  ), //output
@@ -36,7 +36,7 @@ LDL_round #(
 initial begin
     $monitor("req=%b, ready=%h, valid=%h, bin=%h, hot=%b", req, ready, valid, bin, hot);
     $dumpvars(0);
-    #20  rst_n  = 1;
+    #20  rst  = 0;
 
     @(negedge clk) req = 'h1;
     repeat(6) @(negedge clk) ;

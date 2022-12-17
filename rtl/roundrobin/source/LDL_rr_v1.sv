@@ -1,12 +1,14 @@
 // https://github.com/balanx/LogicDesignLib
 
-module  LDL_round
+`include  "LDL_macros.vh"
+
+module  LDL_rr_v1
 #(parameter
     BIN_WIDTH = 3
    ,REQ_WIDTH = 1 << BIN_WIDTH
 )(
      input                          clk
-   , input                          rst_n  // 0 is reset
+   , input                          rst
    , input       [REQ_WIDTH -1:0]   req
    , input                          ready
    ,output reg                      valid
@@ -31,8 +33,9 @@ always @* begin
 end
 
 wire [BIN_WIDTH -1:0]  msb_bin, lsb_bin;
+wire                   msb_vld, lsb_vld;
 
-LDL_hot2bin_pri #(
+LDL_hot2bin_pri_v1 #(
         .BIN_WIDTH              ( BIN_WIDTH              )
     )
     msb_pri (
@@ -42,7 +45,7 @@ LDL_hot2bin_pri #(
     );
 
 
-LDL_hot2bin_pri #(
+LDL_hot2bin_pri_v1 #(
         .BIN_WIDTH              ( BIN_WIDTH              )
     )
     lsb_pri (
@@ -53,8 +56,9 @@ LDL_hot2bin_pri #(
 
 wire  vld = msb_vld | lsb_vld;
 
-always @(posedge clk) begin
-    if (!rst_n) begin
+`LDL_ALWAYS
+begin
+    if (rst) begin
         valid <=  0;
         bin <=  0;
     end
@@ -66,7 +70,7 @@ always @(posedge clk) begin
 end
 
 
-LDL_bin2hot #(
+LDL_bin2hot_v1 #(
         .BIN_WIDTH              ( BIN_WIDTH              ) 
     )
     bin2hot (
@@ -75,5 +79,5 @@ LDL_bin2hot #(
         .y                      ( hot                    )  //output [(1<<WIDTH)-1:0]
     );
 
-endmodule // Logic Design Library
+endmodule // LDL.
 

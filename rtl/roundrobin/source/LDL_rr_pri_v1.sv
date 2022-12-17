@@ -1,13 +1,15 @@
 // https://github.com/balanx/LogicDesignLib
 
-module  LDL_round_pri
+`include  "LDL_macros.vh"
+
+module  LDL_rr_pri_v1
 #(parameter
     BIN_WIDTH = 3
    ,COS_WIDTH = 2
    ,REQ_WIDTH = 1 << BIN_WIDTH
 )(
      input                          clk
-   , input                          rst_n  // 0 is reset
+   , input                          rst
    , input       [REQ_WIDTH -1:0]   req
    , input       [REQ_WIDTH -1:0][COS_WIDTH -1:0]   cos // 0 is the lowest
    , input                          ready
@@ -35,12 +37,12 @@ always @* begin
 end
 
 
-LDL_round #(
+LDL_rr_v1 #(
         .BIN_WIDTH              ( BIN_WIDTH              )
     )
     round (
         .clk                    ( clk                    ), // input
-        .rst_n                  ( rst_n                  ), // input
+        .rst                    ( rst                    ), // input
         .req                    ( max_req                ), // input[REQ_WIDTH-1:0]
         .ready                  ( ready                  ), // input
         .hot                    ( hot                    ), //output[REQ_WIDTH-1:0]
@@ -49,5 +51,5 @@ LDL_round #(
     );
 
 
-endmodule // Logic Design Library
+endmodule // LDL.
 

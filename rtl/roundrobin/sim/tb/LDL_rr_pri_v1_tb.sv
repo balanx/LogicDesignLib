@@ -2,7 +2,7 @@
 
 `timescale  1ns/1ns
 
-module  LDL_round_pri_tb;
+module  LDL_rr_pri_v1_tb;
 
 
 parameter
@@ -11,7 +11,7 @@ parameter
     REQ_WIDTH = 1 << BIN_WIDTH;
 
 reg                      clk   = 0;
-reg                      rst_n = 0;
+reg                      rst   = 1;
 reg    [REQ_WIDTH -1:0]  req   = 0;
 reg    [REQ_WIDTH -1:0][COS_WIDTH -1:0]  cos   = 0;
 reg                      ready   = 1;
@@ -21,13 +21,13 @@ wire   [REQ_WIDTH -1:0]  hot;
 
 always #5 clk = ~clk;
 
-LDL_round_pri #(
+LDL_rr_pri_v1 #(
         .BIN_WIDTH              ( BIN_WIDTH              ),
         .COS_WIDTH              ( COS_WIDTH              )
     )
     dut (
         .clk                    ( clk                    ), // input
-        .rst_n                  ( rst_n                  ), // input
+        .rst                    ( rst                    ), // input
         .req                    ( req                    ), // input[REQ_WIDTH-1:0]
         .cos                    ( cos                    ), // input
         .ready                  ( ready                  ), // input
@@ -40,7 +40,7 @@ LDL_round_pri #(
 initial begin
     $monitor("cos=%h, req=%b, ready=%h, bin=%h, valid=%b, hot=%b", cos, req, ready, bin, valid, hot);
     $dumpvars(0);
-    #20  rst_n  = 1;
+    #20  rst  = 0;
 
     @(negedge clk) req = 'ha5;
     repeat(6) @(negedge clk) ;

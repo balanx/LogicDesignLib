@@ -30,4 +30,4 @@ cos=0404, req=11111111, ready=1, bin=5, valid=1, hot=00100000
 cos=0404, req=11111111, ready=1, bin=1, valid=1, hot=00000010
 cos=0404, req=00000000, ready=1, bin=1, valid=1, hot=00000010
 cos=0404, req=00000000, ready=1, bin=1, valid=0, hot=00000000
-./tb/LDL_round_pri_tb.sv:74: $finish called at 230 (1ns)
+./tb/LDL_rr_pri_v1_tb.sv:61: $finish called at 230 (1ns)
