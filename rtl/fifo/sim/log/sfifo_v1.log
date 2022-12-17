@@ -20,8 +20,8 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       145 : 0    a0    0    0    13    1
       155 : 0    a0    0    0    14    1
       165 : 0    a0    0    0    15    1
-      175 : 0    a0    0    1    16    1
-      230 : 1    a0    0    1    16    0
+      175 : 0    a0    0    1     0    1
+      230 : 1    a0    0    1     0    0
       235 : 1    a1    0    0    15    0
       245 : 1    a2    0    0    14    0
       255 : 1    a3    0    0    13    0

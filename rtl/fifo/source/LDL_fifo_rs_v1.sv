@@ -15,12 +15,12 @@ module  LDL_fifo_rs_v1  // read-side
    ,output reg   [AW   :0]  r_pt
    , input       [AW   :0]  w_pt
    ,output                  mr
-   ,output       [AW   :0]  rcnt
+   ,output       [AW -1:0]  rcnt
 );
 
 wire    fr    = (~empty & re);
 assign  ra    = (AHEAD && fr) ? (r_pt[AW-1:0] + 1'b1) : r_pt[AW-1:0];
-assign  rcnt  = (w_pt  - r_pt);
+assign  rcnt  =  AW'(w_pt - r_pt);
 assign  mr    = (w_pt != r_pt);
 
 `LDL_ALWAYS

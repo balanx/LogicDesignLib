@@ -17,8 +17,8 @@ module  LDL_afifo_v1
    ,output                  empty
    ,output                  full
    ,output       [DW -1:0]  dout
-   ,output       [AW   :0]  wcnt
-   ,output       [AW   :0]  rcnt
+   ,output       [AW -1:0]  wcnt
+   ,output       [AW -1:0]  rcnt
 );
 
 wire  [AW -1 : 0]  wa, ra;
@@ -40,7 +40,7 @@ LDL_fifo_ws_v1 #(
         .r_pt                   ( r_pt2w                 ), //I [AW  :0]
         .w_pt                   ( w_pt                   ), //O [AW  :0]
         .mw                     ( mem_we                 ), //O
-        .wcnt                   ( wcnt                   )  //O [AW:0]
+        .wcnt                   ( wcnt                   )  //O [AW-1:0]
     );
 
 
@@ -58,7 +58,7 @@ LDL_fifo_rs_v1 #(
         .r_pt                   ( r_pt                   ), //O [AW  :0]
         .w_pt                   ( w_pt2r                 ), //I [AW  :0]
         .mr                     ( mem_re                 ), //O
-        .rcnt                   ( rcnt                   )  //O [AW:0]
+        .rcnt                   ( rcnt                   )  //O [AW-1:0]
     );
 
 
