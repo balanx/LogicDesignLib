@@ -42,8 +42,8 @@ LDL_sfifo_v1 #(
         .empty                  ( empty                  ), //O
         .full                   ( full                   ), //O
         .dout                   ( dout                   ), //O [DW-1:0]
-        .wcnt                   ( wcnt                   ), //O [AW:0]
-        .rcnt                   ( rcnt                   )  //O [AW:0]
+        .wcnt                   ( wcnt                   ), //O [AW-1:0]
+        .rcnt                   ( rcnt                   )  //O [AW-1:0]
     );
 
 
@@ -89,8 +89,8 @@ initial begin
 end
 
 initial begin
-    $display("     time : re  dout empty full count  we");
-    $monitor("%9d : %b    %h    %b    %b    %2d    %b", $time, re, dout, empty, full, wcnt, we);
+    $display("     time : re  dout empty full wcnt  rcnt");
+    $monitor("%9d : %b    %h    %b    %b    %2d    %2d", $time, re, dout, empty, full, wcnt, rcnt);
 end
 
 
