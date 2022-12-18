@@ -19,8 +19,8 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       145 : 0    a0    0    0    13    13
       155 : 0    a0    0    0    14    14
       165 : 0    a0    0    0    15    15
-      175 : 0    a0    0    1     0     0
-      230 : 1    a0    0    1     0     0
+      175 : 0    a0    0    1    16    16
+      230 : 1    a0    0    1    16    16
       235 : 1    a1    0    0    15    15
       245 : 1    a2    0    0    14    14
       255 : 1    a3    0    0    13    13
@@ -36,11 +36,10 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       355 : 1    ad    0    0     3     3
       365 : 1    ae    0    0     2     2
       375 : 1    af    0    0     1     1
-      385 : 1    a0    1    0     0     0
-      445 : 1    a0    1    0     1     1
+      385 : 1    af    1    0     0     0
+      445 : 1    af    1    0     1     1
       455 : 1    b5    0    0     1     1
-Warning : @LDL_sfifo_v1_tb.dut.p2ram_rs : read & write on the same address (0x1) at         0 ns
-      465 : 1    a1    1    0     1     1
+      465 : 1    b5    1    0     1     1
       475 : 1    b6    0    0     2     2
       485 : 1    b7    0    0     2     2
       495 : 1    b8    0    0     2     2
@@ -52,26 +51,24 @@ Warning : @LDL_sfifo_v1_tb.dut.p2ram_rs : read & write on the same address (0x1)
       555 : 1    be    0    0     2     2
       565 : 1    bf    0    0     2     2
       575 : 1    c0    0    0     1     1
-      585 : 1    ac    1    0     0     0
-      685 : 1    ac    1    0     1     1
+      585 : 1    c0    1    0     0     0
+      685 : 1    c0    1    0     1     1
       695 : 1    c1    0    0     2     2
       705 : 1    c2    0    0     1     1
-Warning : @LDL_sfifo_v1_tb.dut.p2ram_rs : read & write on the same address (0xe) at         0 ns
-      715 : 1    ae    1    0     1     1
+      715 : 1    c2    1    0     1     1
       725 : 1    c3    0    0     2     2
       735 : 1    c4    0    0     1     1
-      745 : 1    b5    1    0     0     0
-      830 : 0    b5    1    0     0     0
-      835 : 0    b5    1    0     1     1
+      745 : 1    c4    1    0     0     0
+      830 : 0    c4    1    0     0     0
+      835 : 0    c4    1    0     1     1
       845 : 0    c5    0    0     1     1
       850 : 1    c5    0    0     1     1
-Warning : @LDL_sfifo_v1_tb.dut.p2ram_rs : read & write on the same address (0x1) at         0 ns
-      855 : 1    b6    1    0     1     1
-      860 : 0    b6    1    0     1     1
+      855 : 1    c5    1    0     1     1
+      860 : 0    c5    1    0     1     1
       865 : 0    c6    0    0     2     2
       870 : 1    c6    0    0     2     2
       875 : 1    c7    0    0     2     2
       885 : 1    c8    0    0     2     2
       895 : 1    c9    0    0     1     1
-      905 : 1    ba    1    0     0     0
+      905 : 1    c9    1    0     0     0
 ./tb/LDL_sfifo_v1_tb.sv:88: $finish called at 910 (1ns)

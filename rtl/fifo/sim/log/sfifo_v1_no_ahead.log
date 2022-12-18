@@ -19,8 +19,8 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       145 : 0    a0    0    0    13    13
       155 : 0    a0    0    0    14    14
       165 : 0    a0    0    0    15    15
-      175 : 0    a0    0    1     0     0
-      230 : 1    a0    0    1     0     0
+      175 : 0    a0    0    1    16    16
+      230 : 1    a0    0    1    16    16
       235 : 1    a0    0    0    15    15
       245 : 1    a1    0    0    14    14
       255 : 1    a2    0    0    13    13
@@ -41,6 +41,7 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       455 : 1    b5    0    0     1     1
       465 : 1    b5    1    0     1     1
       475 : 1    b6    0    0     2     2
+      485 : 1    b6    0    0     2     2
       495 : 1    b7    0    0     2     2
       505 : 1    b8    0    0     2     2
       515 : 1    b9    0    0     2     2
@@ -66,6 +67,7 @@ VCD warning: $dumpvars: Package ($unit) is not dumpable with VCD.
       860 : 0    c5    1    0     1     1
       865 : 0    c6    0    0     2     2
       870 : 1    c6    0    0     2     2
+      875 : 1    c6    0    0     2     2
       885 : 1    c7    0    0     2     2
       895 : 1    c8    0    0     1     1
       905 : 1    c9    1    0     0     0

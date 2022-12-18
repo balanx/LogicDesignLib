@@ -33,7 +33,7 @@ always @(posedge clk) begin
         if ((wa == ra) && we) begin
             rv  <=  1'b0;
             // synthesis translate_off
-            $display("Warning : @%m : read & write on the same address (0x%h) at %9t ns", ra, $time);
+            $display("Error : @%m : read & write on the same address (0x%h) at %9t ns", ra, $time);
             // synthesis translate_on
         end
         else

@@ -27,7 +27,7 @@ reg        [DW -1:0]     din   = 'ha0;
 wire                     empty;
 wire                     full;
 wire       [DW -1:0]     dout;
-wire       [AW -1:0]     wcnt, rcnt;
+wire       [AW   :0]     wcnt, rcnt;
 
 always #5  w_clk = ~w_clk;
 always #15 r_clk = ~r_clk;
@@ -48,8 +48,8 @@ LDL_afifo_v1 #(
         .empty                  ( empty                  ), //O
         .full                   ( full                   ), //O
         .dout                   ( dout                   ), //O [DW-1:0]
-        .wcnt                   ( wcnt                   ), //O [AW-1:0]
-        .rcnt                   ( rcnt                   )  //O [AW-1:0]
+        .wcnt                   ( wcnt                   ), //O [AW  :0]
+        .rcnt                   ( rcnt                   )  //O [AW  :0]
     );
 
 

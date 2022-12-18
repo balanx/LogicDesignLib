@@ -15,12 +15,12 @@ module  LDL_fifo_ws_v1  // write-side
    , input       [AW   :0]  r_pt
    ,output reg   [AW   :0]  w_pt
    ,output                  mw
-   ,output       [AW -1:0]  wcnt
+   ,output       [AW   :0]  wcnt
 );
 
 wire    fw    = (~full & we);
 assign  wa    =  w_pt[AW-1:0];
-assign  wcnt  =  AW'(w_pt - r_pt);
+assign  wcnt  = (w_pt - r_pt);
 assign  full  = (w_pt[AW] != r_pt[AW] && w_pt[AW-1:0] == r_pt[AW-1:0]);
 assign  mw    =  fw;
 
