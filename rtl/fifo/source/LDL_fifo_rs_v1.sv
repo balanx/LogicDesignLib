@@ -19,7 +19,7 @@ module  LDL_fifo_rs_v1  // read-side
 );
 
 wire    fr    = (~empty & re);
-assign  ra    = (AHEAD && fr) ? (r_pt[AW-1:0] + 1'b1) : r_pt[AW-1:0];
+assign  ra    = (AHEAD && (rcnt > 1) && fr) ? (r_pt[AW-1:0] + 1'b1) : r_pt[AW-1:0];
 assign  rcnt  =  AW'(w_pt - r_pt);
 assign  mr    = (w_pt != r_pt);
 
@@ -30,10 +30,11 @@ begin
         empty <=   1;
     end
     else begin
-        //one data only
-        if (fr && (rcnt == 1) )
+        if (!mr) //zero data
             empty  <=  1;
-        else if (mr) //one cycle delay
+        else if ((rcnt == 1) && fr) //one data only
+            empty  <=  1;
+        else //if (mr) //one cycle delay
             empty  <=  0;
 
         if (fr) r_pt <= r_pt + 1'b1;

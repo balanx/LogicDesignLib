@@ -1,5 +1,7 @@
 // https://github.com/balanx/LogicDesignLib
 
+`timescale  1ns/1ns
+
 module  LDL_p2ram_rs_v1
 #(parameter
     DW = 8
