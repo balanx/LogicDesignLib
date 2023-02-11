@@ -24,7 +24,7 @@ assign  wcnt  = (w_pt - r_pt);
 assign  full  = (w_pt[AW] != r_pt[AW] && w_pt[AW-1:0] == r_pt[AW-1:0]);
 assign  mw    =  fw;
 
-`LDL_ALWAYS
+`LDL_ALWAYS_STATEMENT(clk, rst)
 begin
     if (rst) begin
         w_pt  <=  '0;

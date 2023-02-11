@@ -15,7 +15,7 @@ module  LDL_count_v1
 );
 
 
-`LDL_ALWAYS
+`LDL_ALWAYS_STATEMENT(clk, rst)
 begin
     if (rst)
         dout <= MODE ?  max  :  '0;

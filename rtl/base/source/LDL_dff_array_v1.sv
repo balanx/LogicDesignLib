@@ -16,7 +16,7 @@ module  LDL_dff_array_v1
 
 reg  [LEVEL * WIDTH -1 : 0] buff;
 
-`LDL_ALWAYS
+`LDL_ALWAYS_STATEMENT(clk, rst)
 begin
     if (rst)
         buff <=  '0;

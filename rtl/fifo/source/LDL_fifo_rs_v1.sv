@@ -23,7 +23,7 @@ assign  ra    = (AHEAD && (rcnt > 1) && fr) ? (r_pt[AW-1:0] + 1'b1) : r_pt[AW-1:
 assign  rcnt  = (w_pt  - r_pt);
 assign  mr    = (w_pt != r_pt);
 
-`LDL_ALWAYS
+`LDL_ALWAYS_STATEMENT(clk, rst)
 begin
     if (rst) begin
         r_pt  <=  '0;

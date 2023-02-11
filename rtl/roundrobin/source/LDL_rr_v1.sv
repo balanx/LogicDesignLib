@@ -56,7 +56,7 @@ LDL_hot2bin_pri_v1 #(
 
 wire  vld = msb_vld | lsb_vld;
 
-`LDL_ALWAYS
+`LDL_ALWAYS_STATEMENT(clk, rst)
 begin
     if (rst) begin
         valid <=  0;
