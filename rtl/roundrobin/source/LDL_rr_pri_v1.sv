@@ -1,7 +1,5 @@
 // https://github.com/balanx/LogicDesignLib
 
-`include  "LDL_macros.vh"
-
 module  LDL_rr_pri_v1
 #(parameter
     BIN_WIDTH = 3

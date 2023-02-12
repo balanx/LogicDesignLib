@@ -1,7 +1,5 @@
 // https://github.com/balanx/LogicDesignLib
 
-`include  "LDL_macros.vh"
-
 module  LDL_cdc_hand_v1
 #(parameter
     DW     = 8  // data  width

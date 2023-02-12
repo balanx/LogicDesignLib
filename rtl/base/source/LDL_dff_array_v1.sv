@@ -1,6 +1,6 @@
 // https://github.com/balanx/LogicDesignLib
 
-`include  "LDL_rtl_macros.vh"
+`include  "LDL_rtl_define.vh"
 
 module  LDL_dff_array_v1
 #(parameter

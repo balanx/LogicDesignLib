@@ -1,7 +1,5 @@
 // https://github.com/balanx/LogicDesignLib
 
-//`include  "LDL_macros.vh"
-
 module  LDL_cdc_buff_v1
 #(parameter
     WIDTH = 1

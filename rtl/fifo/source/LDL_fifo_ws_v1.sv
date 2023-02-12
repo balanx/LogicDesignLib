@@ -1,6 +1,6 @@
 // https://github.com/balanx/LogicDesignLib
 
-`include  "LDL_macros.vh"
+`include  "LDL_rtl_define.vh"
 
 module  LDL_fifo_ws_v1  // write-side
 #(parameter
