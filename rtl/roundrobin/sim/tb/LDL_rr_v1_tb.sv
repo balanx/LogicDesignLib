@@ -14,7 +14,7 @@ reg                      rst   = 1;
 reg    [REQ_WIDTH -1:0]  req   = 0;
 reg                      ready = 1;
 wire   [BIN_WIDTH -1:0]  bin;
-wire   [REQ_WIDTH -1:0]  hot;
+wire   [REQ_WIDTH -1:0]  ack;
 wire                     valid;
 
 always #5 clk = ~clk;
@@ -28,13 +28,13 @@ LDL_rr_v1 #(
         .req                    ( req                    ), // input[WIDTH-1:0]
         .ready                  ( ready                  ), // input
         .valid                  ( valid                  ), //output
-        .hot                    ( hot                    ), //output[WIDTH-1:0]
+        .ack                    ( ack                    ), //output[WIDTH-1:0]
         .bin                    ( bin                    )  //output[$clog2(WIDTH)-1:0]
     );
 
 
 initial begin
-    $monitor("req=%b, ready=%h, valid=%h, bin=%h, hot=%b", req, ready, valid, bin, hot);
+    $monitor("req=%b, ready=%h, valid=%h, bin=%h, ack=%b", req, ready, valid, bin, ack);
     $dumpvars(0);
     #20  rst  = 0;
 

@@ -12,7 +12,7 @@ module  LDL_rr_v1
    , input       [REQ_WIDTH -1:0]   req
    , input                          ready
    ,output reg                      valid
-   ,output       [REQ_WIDTH -1:0]   hot
+   ,output       [REQ_WIDTH -1:0]   ack
    ,output reg   [BIN_WIDTH -1:0]   bin
 );
 
@@ -76,7 +76,7 @@ LDL_bin2hot_v1 #(
     bin2hot (
         .en                     ( valid                  ), // input
         .x                      ( bin                    ), // input [WIDTH-1:0]
-        .y                      ( hot                    )  //output [(1<<WIDTH)-1:0]
+        .y                      ( ack                    )  //output [(1<<WIDTH)-1:0]
     );
 
 endmodule // LDL.

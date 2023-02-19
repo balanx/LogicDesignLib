@@ -17,7 +17,7 @@ reg    [REQ_WIDTH -1:0][COS_WIDTH -1:0]  cos   = 0;
 reg                      ready   = 1;
 wire                     valid;
 wire   [BIN_WIDTH -1:0]  bin;
-wire   [REQ_WIDTH -1:0]  hot;
+wire   [REQ_WIDTH -1:0]  ack;
 
 always #5 clk = ~clk;
 
@@ -31,14 +31,14 @@ LDL_rr_pri_v1 #(
         .req                    ( req                    ), // input[REQ_WIDTH-1:0]
         .cos                    ( cos                    ), // input
         .ready                  ( ready                  ), // input
-        .hot                    ( hot                    ), //output[REQ_WIDTH-1:0]
+        .ack                    ( ack                    ), //output[REQ_WIDTH-1:0]
         .bin                    ( bin                    ), //output[BIN_WIDTH-1:0]
         .valid                  ( valid                  )  //output
     );
 
 
 initial begin
-    $monitor("cos=%h, req=%b, ready=%h, bin=%h, valid=%b, hot=%b", cos, req, ready, bin, valid, hot);
+    $monitor("cos=%h, req=%b, ready=%h, bin=%h, valid=%b, ack=%b", cos, req, ready, bin, valid, ack);
     $dumpvars(0);
     #20  rst  = 0;
 

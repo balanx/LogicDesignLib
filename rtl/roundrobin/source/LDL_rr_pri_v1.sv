@@ -11,7 +11,7 @@ module  LDL_rr_pri_v1
    , input       [REQ_WIDTH -1:0]   req
    , input       [REQ_WIDTH -1:0][COS_WIDTH -1:0]   cos // 0 is the lowest
    , input                          ready
-   ,output       [REQ_WIDTH -1:0]   hot
+   ,output       [REQ_WIDTH -1:0]   ack
    ,output       [BIN_WIDTH -1:0]   bin
    ,output                          valid
 );
@@ -43,7 +43,7 @@ LDL_rr_v1 #(
         .rst                    ( rst                    ), // input
         .req                    ( max_req                ), // input[REQ_WIDTH-1:0]
         .ready                  ( ready                  ), // input
-        .hot                    ( hot                    ), //output[REQ_WIDTH-1:0]
+        .ack                    ( ack                    ), //output[REQ_WIDTH-1:0]
         .bin                    ( bin                    ), //output[BIN_WIDTH-1:0]
         .valid                  ( valid                  )  //output
     );
