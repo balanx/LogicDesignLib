@@ -13,11 +13,12 @@ parameter
 reg                      clk   = 0;
 reg                      rst   = 1;
 reg    [REQ_WIDTH -1:0]  req   = 0;
-reg    [REQ_WIDTH -1:0][COS_WIDTH -1:0]  cos   = 0;
-reg                      ready   = 1;
+reg    [REQ_WIDTH -1:0][COS_WIDTH -1:0]  icos   = 0;
+reg                      ready = 1;
 wire                     valid;
 wire   [BIN_WIDTH -1:0]  bin;
 wire   [REQ_WIDTH -1:0]  ack;
+wire   [COS_WIDTH -1:0]  ocos;
 
 always #5 clk = ~clk;
 
@@ -29,16 +30,17 @@ LDL_rr_pri_v1 #(
         .clk                    ( clk                    ), // input
         .rst                    ( rst                    ), // input
         .req                    ( req                    ), // input[REQ_WIDTH-1:0]
-        .cos                    ( cos                    ), // input
+        .icos                   ( icos                   ), // input[REQ_WIDTH-1:0][COS_WIDTH-1:0]
         .ready                  ( ready                  ), // input
         .ack                    ( ack                    ), //output[REQ_WIDTH-1:0]
         .bin                    ( bin                    ), //output[BIN_WIDTH-1:0]
-        .valid                  ( valid                  )  //output
+        .valid                  ( valid                  ), //output
+        .ocos                   ( ocos                   )  //output[COS_WIDTH-1:0]
     );
 
 
 initial begin
-    $monitor("cos=%h, req=%b, ready=%h, bin=%h, valid=%b, ack=%b", cos, req, ready, bin, valid, ack);
+    $monitor("ocos=%h, req=%b, ready=%h, bin=%h, valid=%b, ack=%b", ocos, req, ready, bin, valid, ack);
     $dumpvars(0);
     #20  rst  = 0;
 
@@ -46,15 +48,15 @@ initial begin
     repeat(6) @(negedge clk) ;
     @(negedge clk) req = 0;
 
-    @(negedge clk) req = 'hff; cos = {2'h3, 2'h2, 2'h1, 2'h0, 2'h3, 2'h2, 2'h1, 2'h0};
+    @(negedge clk) req = 'hff; icos = {2'h3, 2'h2, 2'h1, 2'h0, 2'h3, 2'h2, 2'h1, 2'h0};
     repeat(2) @(negedge clk) ;
     @(negedge clk) req = 0;
 
-    @(negedge clk) req = 'hff; cos = {2'h0, 2'h2, 2'h1, 2'h0, 2'h0, 2'h2, 2'h1, 2'h0};
+    @(negedge clk) req = 'hff; icos = {2'h0, 2'h2, 2'h1, 2'h0, 2'h0, 2'h2, 2'h1, 2'h0};
     repeat(2) @(negedge clk) ;
     @(negedge clk) req = 0;
 
-    @(negedge clk) req = 'hff; cos = {2'h0, 2'h0, 2'h1, 2'h0, 2'h0, 2'h0, 2'h1, 2'h0};
+    @(negedge clk) req = 'hff; icos = {2'h0, 2'h0, 2'h1, 2'h0, 2'h0, 2'h0, 2'h1, 2'h0};
     repeat(2) @(negedge clk) ;
     @(negedge clk) req = 0;
 
