@@ -29,7 +29,7 @@ $(case) : % : %.log
 	vvp  -l $@  ./$(basename $@).out
 
 diff :
-	@for i in `ls *.log` ; do diff -sq $$i ./log/$$i ; done
+	@for i in `ls *.log` ; do diff -Zsq $$i ./log/$$i ; done
 
 wave :
 	gtkwave  *.vcd &
