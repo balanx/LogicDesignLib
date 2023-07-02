@@ -27,7 +27,7 @@ assign  mw    =  fw;
 `LDL_ALWAYS_STATEMENT(clk, rst)
 begin
     if (rst) begin
-        w_pt  <=  '0;
+        w_pt  <=  'd0;
     end
     else begin
         if (fw) w_pt <= w_pt + 1'b1;

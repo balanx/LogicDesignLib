@@ -26,7 +26,7 @@ assign  mr    = (w_pt != r_pt);
 `LDL_ALWAYS_STATEMENT(clk, rst)
 begin
     if (rst) begin
-        r_pt  <=  '0;
+        r_pt  <=  'd0;
         empty <=   1;
     end
     else begin
@@ -34,7 +34,7 @@ begin
             empty  <=  1;
         else if ((rcnt == 1) && fr) //one data only
             empty  <=  1;
-        else //if (mr) //one cycle delay
+        else    //one cycle delay
             empty  <=  0;
 
         if (fr) r_pt <= r_pt + 1'b1;

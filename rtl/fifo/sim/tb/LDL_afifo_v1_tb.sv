@@ -55,62 +55,46 @@ LDL_afifo_v1 #(
 
 initial begin
     $dumpvars(0);
-    #20  w_rst   = 0; r_rst   = 0;
+    $monitor($time, " : %b  %b", empty, full);
 
-    repeat(20) STREAM_SEND (din, we, ~full);
-    STREAM_STOP (we);  re = 1;
-    repeat(20) @(negedge w_clk);
-
-    repeat(20) STREAM_SEND (din, we, ~full);
-    STREAM_STOP (we);
-    repeat(40) @(negedge w_clk);
-    #20 $finish;
+    #20000 $display("All done!\n");
+    $finish;
 end
-
-`ifdef AFIFO_V1_NO_AHEAD
-reg   dv = 0;
-
-always @(posedge r_clk) dv <= (re && ~empty);
-`endif
-
-reg  [7:0]  gold = 'ha0;
 
 initial begin
-    $display("     time : re  dout empty full wcnt  rcnt");
-    $monitor("%9d : %b    %h    %b    %b    %2d    %2d", $time, re, dout, empty, full, wcnt, rcnt);
-
-`ifdef AFIFO_V1_NO_AHEAD
-    forever STREAM_RECV (gold, dout, dv, 1);
-`else
-    forever STREAM_RECV (gold, dout, ~empty, re);
-`endif
+    #50  w_rst = 0; r_rst = 0;
+    forever SEND();
 end
 
-task  STREAM_SEND (inout [7:0] data, output valid, input ready);
+always RECV();
 
-begin
-    @(negedge w_clk) valid = 1; if (ready) data = data + 1;
-end
-endtask
+integer  seed = 0;
+reg  [DW -1:0] sb[$] = {};
 
-task  STREAM_STOP (inout valid);
-
-begin
-    @(negedge w_clk) valid = 0;
-end
-endtask
-
-task  STREAM_RECV (inout [7:0] gold, input [7:0] data, input valid, input ready);
-
-begin
-    @(negedge r_clk) if (ready && valid) begin
-        gold = gold + 1;
-        if (gold != data) begin
-            gold = data;
-            $display("Error at %9t", $time);
+task SEND ();
+    @(negedge w_clk) we = $random(seed) % 2;
+        if (~full && we) begin
+            din = din + 1;
+            sb.push_back(din);
         end
+endtask
+
+reg  prev = 0;
+
+task RECV ();
+    @(negedge r_clk) re = $random(seed) % 2;
+    @(posedge r_clk)
+    if (AHEAD ? (~empty && re) : prev) begin
+        if (dout != sb[0]) begin
+            $error("dout(%h) != din(%h)", dout, sb[0]);
+            #50 $finish;
+        end
+        sb.pop_front();
     end
-end
+
+    //if (!AHEAD)
+        prev = ~empty && re;
+
 endtask
 
 

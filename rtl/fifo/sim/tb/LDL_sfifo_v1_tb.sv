@@ -49,50 +49,47 @@ LDL_sfifo_v1 #(
 
 initial begin
     $dumpvars(0);
-    #20  rst   = 0;
+    $monitor($time, " : %b  %b", empty, full);
 
-    @(negedge clk) we = 1;
-    repeat(20) begin
-        @(negedge clk) din = din + 1;
-    end
-    @(negedge clk) we = 0;  re = 1;
-    repeat(20) @(negedge clk);
-
-    // d * d d d
-    @(negedge clk) we = 1; din = din + 1;
-    @(negedge clk) we = 0;
-    @(negedge clk) we = 1; din = din + 1;
-    repeat(10) begin
-        @(negedge clk) din = din + 1;
-    end
-
-    // d d * d d d
-    @(negedge clk) we = 0;
-    repeat(10) @(negedge clk);
-    @(negedge clk) we = 1; din = din + 1;
-    @(negedge clk) din = din + 1;
-    @(negedge clk) we = 0;
-    @(negedge clk) we = 1; din = din + 1;
-    @(negedge clk) din = din + 1;
-    @(negedge clk) we = 0;
-
-    repeat(10) @(negedge clk);
-    re = 0; we = 1; din = din + 1;
-    @(negedge clk) we = 0;
-    @(negedge clk) we = 1; re = 1; din = din + 1;
-    @(negedge clk) re = 0; din = din + 1;
-    @(negedge clk) re = 1; din = din + 1;
-    @(negedge clk) din = din + 1;
-    @(negedge clk) we = 0;
-
-    #20 $finish;
+    #20000 $display("All done!\n");
+    $finish;
 end
 
 initial begin
-    $display("     time : re  dout empty full wcnt  rcnt");
-    $monitor("%9d : %b    %h    %b    %b    %2d    %2d", $time, re, dout, empty, full, wcnt, rcnt);
+    #20  rst = 0;
+    forever SEND();
 end
 
+always RECV();
+
+integer  seed = 0;
+reg  [DW -1:0] sb[$] = {};
+
+task SEND ();
+    @(negedge clk) we = $random(seed) % 2;
+        if (~full && we) begin
+            din = din + 1;
+            sb.push_back(din);
+        end
+endtask
+
+reg  prev = 0;
+
+task RECV ();
+    @(negedge clk) re = $random(seed) % 2;
+    @(posedge clk)
+    if (AHEAD ? (~empty && re) : prev) begin
+        if (dout != sb[0]) begin
+            $error("dout(%h) != din(%h)", dout, sb[0]);
+            #50 $finish;
+        end
+        sb.pop_front();
+    end
+
+    //if (!AHEAD)
+        prev = ~empty && re;
+
+endtask
 
 endmodule // Logic Design Lib.
 
