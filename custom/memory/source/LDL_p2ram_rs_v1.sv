@@ -32,9 +32,9 @@ always @(posedge clk) begin
 
         if ((wa == ra) && we) begin
             rv  <=  1'b0;
-            // synthesis translate_off
-            $display("Error : @%m : read & write on the same address (0x%h) at %9t ns", ra, $time);
-            // synthesis translate_on
+            //synthesis translate_off
+            $error("read & write the same address (0x%h)", ra);
+            //synthesis translate_on
         end
         else
             rv  <=  1'b1;
@@ -43,14 +43,20 @@ always @(posedge clk) begin
         rv  <=  1'b0;
 end
 
-// synthesis translate_off
+//synthesis translate_off
 initial begin
     $display("Ram@%m : LDL_p2ram_rs_v1 : %d : %d", DW, DEPTH);
 
     for (integer i=0; i<DEPTH; i++)
         mem[i] = ($random > 0) ? '1 : '0;
 end
-// synthesis translate_on
+
+always @(posedge clk) begin
+    if (wa >= DEPTH) $error("wa = %h exceeded the max depth !", wa);
+
+    if (ra >= DEPTH) $error("ra = %h exceeded the max depth !", ra);
+end
+//synthesis translate_on
 
 endmodule // LDL.
 
